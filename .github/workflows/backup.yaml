@@ -8,7 +8,7 @@ on:
     branches:
       - main
 env: 
-  DB_HOST: "127.0.0.1"
+  DB_HOST: "localhost"
   DB_USER: "root"
   MYSQL_PWD: "password"
   DB_NAME: "mydatabase"
@@ -49,7 +49,7 @@ jobs:
       - name: Wait for MySQL to be ready
         run: |
           for i in {1..30}; do
-            if mysqladmin ping -h 127.0.0.1 --silent; then
+            if mysqladmin ping -h localhost --silent; then
               echo "MySQL is ready!"
               break
             fi
