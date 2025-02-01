@@ -73,6 +73,11 @@ jobs:
         run: |
           chmod +x backup.sh  # Ensure the script is executable
           ./backup.sh
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          MYSQL_PWD: ${{ secrets.MYSQL_PWD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
   
       # Step 5: Run the BATS tests
       - name: Run BATS tests

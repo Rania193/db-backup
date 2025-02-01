@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Load environment variables from .env file
-set -a
-[ -f .env ] && . .env
-set +a
+# set -a
+# [ -f .env ] && . .env
+# set +a
 
 # Configuration
 BACKUP_DIR="backups"
