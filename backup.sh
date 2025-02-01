@@ -16,7 +16,6 @@ fi
 
 # Perform the backup
 mysqldump -h "$DB_HOST" -u "$DB_USER" -p'password' "$DB_NAME" > "$BACKUP_DIR/${DB_NAME}_backup_$TIMESTAMP.sql"
-cat "$BACKUP_DIR/${DB_NAME}_backup_$TIMESTAMP.sql"
 
 # Check if the backup was successful
 if [ $? -eq 0 ]; then
