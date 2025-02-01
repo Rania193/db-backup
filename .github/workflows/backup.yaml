@@ -57,7 +57,7 @@ jobs:
             sleep 5
           done
       - name: Create database
-        run: mysql -h 127.0.0.1 -u root -ppassword -e "CREATE DATABASE $DB_NAME;"
+        run: mysql -h 127.0.0.1 -u root --password 'password' -e "CREATE DATABASE $DB_NAME;"
 
       # Step 4: Seed the database using the SQL script
       - name: Seed database
