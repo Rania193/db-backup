@@ -15,7 +15,7 @@ if [ ! -d "$BACKUP_DIR" ]; then
 fi
 
 # Perform the backup
-mysqldump -h "$DB_HOST" -u "$DB_USER" -p'password' "$DB_NAME" > "$BACKUP_DIR/${DB_NAME}_backup_$TIMESTAMP.sql" 2>/dev/null
+mysqldump -h "$DB_HOST" -u "$DB_USER" -p'password' "$DB_NAME" > "$BACKUP_DIR/${DB_NAME}_backup_$TIMESTAMP.sql" 2>/dev/null # due to an issue with the mysql dump command, it's not detecting the password when it's passed from an env variable, the only way it was solved was by hard-coding it
 
 # Check if the backup was successful
 if [ $? -eq 0 ]; then
