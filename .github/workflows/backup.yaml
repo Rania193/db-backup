@@ -22,7 +22,7 @@ jobs:
       mysql:
         image: mysql:latest
         env:
-          MYSQL_ROOT_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_PWD }}
         options: >-
           --health-cmd="mysqladmin ping --silent"
           --health-interval=10s
@@ -57,16 +57,16 @@ jobs:
             sleep 5
           done
       - name: Create database
-        run: mysql -h 127.0.0.1 -u root -ppassword -e "CREATE DATABASE $DB_NAME;"
+        run: mysql -h 127.0.0.1 -u ${{ secrets.DB_USER }} -p${{ secrets.MYSQL_PWD }} -e "CREATE DATABASE ${{ secrets.DB_NAME }};"
 
       # Step 4: Seed the database using the SQL script
       - name: Seed database
-        run: mysql -h 127.0.0.1 -u root -ppassword < seed.sql
+        run: mysql -h 127.0.0.1 -u ${{ secrets.DB_USER }} -p${{ secrets.MYSQL_PWD }} < seed.sql
       - name: Grant MySQL Remote Access
         run: |
           mysql -h 127.0.0.1 -u root -ppassword -e "
-          CREATE USER IF NOT EXISTS 'root'@'172.%' IDENTIFIED WITH caching_sha2_password BY 'password';
-          GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.%' WITH GRANT OPTION;
+          CREATE USER IF NOT EXISTS '${secrets.DB_USER}'@'172.%' IDENTIFIED WITH caching_sha2_password BY '${secrets.MYSQL_PWD}';
+          GRANT ALL PRIVILEGES ON *.* TO '${secrets.DB_USER}'@'172.%' WITH GRANT OPTION;
           FLUSH PRIVILEGES;"
 
       - name: Run MySQL Backup Script
