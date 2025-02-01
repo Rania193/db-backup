@@ -15,7 +15,7 @@ if [ ! -d "$BACKUP_DIR" ]; then
 fi
 
 # Perform the backup
-mysqldump -h "$DB_HOST" -u "$DB_USER" "$DB_NAME" > "$BACKUP_DIR/${DB_NAME}_backup_$TIMESTAMP.sql"
+mysqldump  -u "$DB_USER" "$DB_NAME" > "$BACKUP_DIR/${DB_NAME}_backup_$TIMESTAMP.sql"
 
 # Check if the backup was successful
 if [ $? -eq 0 ]; then
