@@ -65,8 +65,8 @@ jobs:
       - name: Grant MySQL Remote Access
         run: |
           mysql -h 127.0.0.1 -u root -ppassword -e "
-          CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'password';
-          GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+          CREATE USER IF NOT EXISTS 'root'@'172.%' IDENTIFIED WITH caching_sha2_password BY 'password';
+          GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.%' WITH GRANT OPTION;
           FLUSH PRIVILEGES;"
 
       - name: Run MySQL Backup Script
