@@ -7,7 +7,7 @@ set +a
 
 # Configuration
 BACKUP_DIR="backups"
-TIMESTAMP=$(date +"%F_%T")
+TIMESTAMP=$(date +"%F_%H-%M-%S")
 
 # Check if backup directory exists, if not create it
 if [ ! -d "$BACKUP_DIR" ]; then
