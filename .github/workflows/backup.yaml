@@ -62,17 +62,18 @@ jobs:
       # Step 4: Seed the database using the SQL script
       - name: Seed database
         run: mysql -h 127.0.0.1 -u root -ppassword < seed.sql
-      - name: Grant MySQL Root Permissions
+      - name: Grant MySQL Remote Access
         run: |
           mysql -h 127.0.0.1 -u root -ppassword -e "
-          ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+          ALTER USER 'root'@'%' IDENTIFIED WITH caching_sha2_password BY 'password';
           GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
           FLUSH PRIVILEGES;"
+
       - name: Run MySQL Backup Script
         run: |
           chmod +x backup.sh  # Ensure the script is executable
           ./backup.sh
-
+  
       # Step 5: Run the BATS tests
       - name: Run BATS tests
         run: bats test.bats
