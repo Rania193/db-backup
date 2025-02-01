@@ -14,5 +14,6 @@ DB_NAME="mydatabase"
 @test "Backup file is created and is non-empty" {
   run bash ./backup.sh
   BACKUP_FILE=$(echo "$output" | xargs)
+  echo "Using backup file: '$BACKUP_FILE'"
   [ "$status" -eq 0 ] && [ -f "$BACKUP_FILE" ] && [ "$(wc -c < "$BACKUP_FILE")" -gt 0 ]
 }
